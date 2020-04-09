@@ -7,7 +7,7 @@
 # https://rstudio.github.io/leaflet/shiny.html
 # Physco_data.csv
 
-setwd("~/PhyscoHunt_Map/Physco_R_practice")
+setwd("~/PhyscoMap")
 
 physco = read.csv("Physco_data.csv")
 head(physco)
