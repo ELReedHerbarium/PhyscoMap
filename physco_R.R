@@ -11,7 +11,7 @@ setwd("~/PhyscoMap")
 
 physco = read.csv("Physco_data.csv")
 head(physco)
-summary(physco)
+summary(physco$latitude)
 
 library(shiny)
 library(leaflet)
