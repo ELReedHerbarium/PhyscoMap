@@ -45,7 +45,17 @@ server <- function(input, output, session) {
     # entire map is being torn down and recreated).
     leaflet(physco) %>% addTiles() %>%
       addCircleMarkers(lng = ~ longitude,
-                       lat = ~ latitude,label = ~ id,
+                       lat = ~ latitude,
+                       popup = ~ paste(
+                         "<b>Observation ID:</b>",
+                         id,
+                         "<br>",
+                         "<b>Observation Date:</b>",
+                         year,
+                         "<br>",
+                         sep=" "
+                       ),
+                       
                        clusterOptions = markerClusterOptions()
       ) %>%
       fitBounds(~min(longitude), ~min(latitude), ~max(longitude), ~max(latitude))
@@ -54,7 +64,16 @@ server <- function(input, output, session) {
   observe(leafletProxy("map", data = filteredData()) %>%
             clearMarkers() %>%
             addCircleMarkers(lng = ~ longitude,
-                             lat = ~ latitude,label = ~ id,
+                             lat = ~ latitude,
+                             popup = ~ paste(
+                               "<b>Observation ID:</b>",
+                               id,
+                               "<br>",
+                               "<b>Observation Date:</b>",
+                               year,
+                               "<br>",
+                               sep=" "
+                             ),
                              clusterOptions = markerClusterOptions()
             ))
 }
