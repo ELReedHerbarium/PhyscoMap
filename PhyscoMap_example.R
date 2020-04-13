@@ -15,7 +15,6 @@ colnames(physco_obs)
 
 ##################### Dataframe Manipulation ###
 
-install.packages("tidyverse")
 library(tidyverse)
 
 physco <- physco_obs %>%
@@ -59,7 +58,7 @@ ui <- bootstrapPage(
   leafletOutput("PhyscoMap",
                 width = "100%",
                 height = "100%"
-                ),
+                )
 )
   
 
