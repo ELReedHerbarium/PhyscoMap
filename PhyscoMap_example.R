@@ -15,10 +15,6 @@ colnames(physco_obs)
 
 ##################### Dataframe Manipulation ###
 
-<<<<<<< HEAD
-=======
-#install.packages("tidyverse")
->>>>>>> 3be395a88d2f674b3f5a25bd2b1441cde1027be7
 library(tidyverse)
 
 physco <- physco_obs %>%
