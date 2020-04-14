@@ -27,14 +27,15 @@ physco <- physco_obs %>%
          latitude,
          longitude,
          scientific_name)
+physco$observed_on = as.Date(physco$observed_on)
 head(physco)
 summary(as.Date(physco$observed_on))
 
 ### Create column of hyperlinks using url column
 
-links <- c(<iframe width="300" height="169" src="physco$url" </iframe>)
-links
-physco$links <- links
+# links <- c(<iframe width="300" height="169" src="physco$url" </iframe>)
+# links
+# physco$links <- links
 
 
 
@@ -136,8 +137,8 @@ ui <- bootstrapPage(
                 
                 # creates the slider to change the date the specimen was observed
                 sliderInput("date", "Observation Date", 
-                            min = min(as.Date(physco$observed_on)), # sets oldest date on slider as min of time range
-                            max = max(as.Date(physco$observed_on)), # sets most recent date on slider as max of time range
+                            min(as.Date(physco$observed_on)), # sets oldest date on slider as min of time range
+                            max(as.Date(physco$observed_on)), # sets most recent date on slider as max of time range
                             value = range(as.Date(physco$observed_on, na.rm=TRUE)), 
                             step = 1,
                             width = "100%"
@@ -156,9 +157,10 @@ server <- function(input, output, session) {
   
   # Reactive expression for the data subsetted to what the user selected
   sliderValues <- reactive({
-    physco %>%
-      filter(observed_on >= input$date[1] & 
-               observed_on <= input$date[2])
+ #   physco[as.Date(physco$observed_on)>=input$date[1] & as.Date(physco$observed_on)<=input$date[2],]
+ #  })
+  
+  physco[which(physco$observed>=input$date[1] & physco$observed_on<=input$date[2]),]
   })
   
   output$PhyscoMap <- renderLeaflet({
