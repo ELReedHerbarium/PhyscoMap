@@ -15,7 +15,6 @@ colnames(physco_obs)
 
 ### Dataframe Manipulation ###
 
-install.packages("tidyverse")
 library(tidyverse)
 
 physco <- physco_obs %>%
@@ -120,7 +119,7 @@ shinyApp(ui, server)
 
 
 
-##### TBA Working Map w/ Slider for observation date #####
+##### NOW WORKING! Map w/ Slider for observation date -> does not create clusters of data points #####
 
 ### ui.R ###
 
@@ -181,7 +180,7 @@ server <- function(input, output, session) {
                          url,
                          sep=" "
                        ),
-                       clusterOptions = markerClusterOptions()
+                       #clusterOptions = markerClusterOptions()     ### this is what's causing issues
       ) %>%
       fitBounds(~min(longitude), ~min(latitude), ~max(longitude), ~max(latitude))
   })
@@ -202,7 +201,7 @@ server <- function(input, output, session) {
                                url,
                                sep=" "
                              ),
-                             clusterOptions = markerClusterOptions()
+                             #clusterOptions = markerClusterOptions()    ### this is what's causing issues
             )
   })
 }
