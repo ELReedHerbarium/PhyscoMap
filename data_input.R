@@ -1,4 +1,4 @@
-setwd("~/PhyscoMap")
+#setwd("~/PhyscoMap")
 
 physco_obs = read.csv("observations-84630_OriginalExport_2020-04-08.csv")
 
