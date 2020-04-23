@@ -30,11 +30,17 @@ server <- function(input, output, session) {
                          "<b>Observation Date:</b>",
                          observed_on,
                          "<br>",
+                         "<b>Phenology Score:</b>",
+                         pheno,
                          url,
                          sep=" "
                        ),
-                       #clusterOptions = markerClusterOptions()     ### this is what's causing issues
+                       color = ~ pal(pheno), #use the palette we want
       ) %>%
+      addLegend(position = "bottomright", pal = pal, #Adding the legend
+                values = ~ pheno, 
+                title = "Phenology Score",
+                opacity = 1) %>%
       fitBounds(~min(longitude), ~min(latitude), ~max(longitude), ~max(latitude))
   })
   
@@ -51,10 +57,12 @@ server <- function(input, output, session) {
                          "<b>Observation Date:</b>",
                          observed_on,
                          "<br>",
+                         "<b>Phenology Score:</b>",
+                         pheno,
                          url,
                          sep=" "
                        ),
-                       #clusterOptions = markerClusterOptions()    ### this is what's causing issues
+                       color = ~ pal(pheno), #use the palette we want
       )
   })
 }

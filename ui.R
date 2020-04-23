@@ -12,8 +12,8 @@ ui <- bootstrapPage(
   leafletOutput("PhyscoMap", width = "100%", height = "100%"),
   
   # places the slider and color scheme selection in bottom right corner of map window, but makes it movable
-  absolutePanel(bottom = 20, 
-                right = 100,
+  absolutePanel(top=10, 
+                right = 10,
                 draggable = TRUE,
                 
                 # creates the slider to change the date the specimen was observed
@@ -26,6 +26,11 @@ ui <- bootstrapPage(
                             #animationOptions(interval = 1000,
                             #                 loop = TRUE,
                             #                 )
-                )
+                ),
   )
 )
+
+
+### Haley's Additions ###
+
+# Need to creat a new panel to house sliders, search bars, and selectable layers
