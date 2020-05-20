@@ -4,7 +4,7 @@ physco_obs = read.csv("observations-84630_OriginalExport_2020-04-08.csv")
 
 ### Dataframe Manipulation ###
 
-#library(tidyverse)
+library(tidyverse)
 
 physco <- physco_obs %>%
   select(id, # observation UID

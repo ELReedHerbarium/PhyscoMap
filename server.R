@@ -1,9 +1,14 @@
 # server.R
 
-#library(shiny)
-#library(leaflet)
+library(shiny)
+library(leaflet)
 
 source("data_input.R")
+
+subsetPhysco <- function(physco, date.range, pheno.list) {
+  subset1 <- physco[which(physco$observed_on>=date.range[1] & physco$observed_on<=date.range[2]),]
+  subset2 <- subset1[subset1$pheno %in% pheno.list,]
+}
 
 server <- function(input, output, session) {
   
@@ -11,12 +16,13 @@ server <- function(input, output, session) {
   sliderValues <- reactive({
     #   physco[as.Date(physco$observed_on)>=input$date[1] & as.Date(physco$observed_on)<=input$date[2],]
     #  })
-    
-    physco[which(physco$observed>=input$date[1] & physco$observed_on<=input$date[2]),]
+    subsetPhysco(physco, input$date, input$pheno)
+#    physco[which(physco$observed_on>=input$date[1] & physco$observed_on<=input$date[2]),]
   })
   
   PhenoScores <- reactive({
-    physco[physco$pheno %in% input$pheno,]
+    subsetPhysco(physco, input$date, input$pheno)
+    #    physco[physco$pheno %in% input$pheno,]
   })
   
   output$PhyscoMap <- renderLeaflet({

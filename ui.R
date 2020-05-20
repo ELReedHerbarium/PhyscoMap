@@ -1,7 +1,7 @@
 # ui.R
 
-#library(shiny)
-#library(leaflet)
+library(shiny)
+library(leaflet)
 
 source("data_input.R")
 
@@ -23,8 +23,9 @@ ui <- bootstrapPage(
         )
       ),
       wellPanel(
-        selectInput("pheno","Phenology Scores",
+        ?selectInput("pheno","Phenology Scores",
                     choices = c("no sporophyte", "spear sporophyte (no enlarged capsule)", "green capsule", "brown capsule", "opened capsule"),
+                    #selected = c("no sporophyte", "spear sporophyte (no enlarged capsule)", "green capsule", "brown capsule", "opened capsule"),
                     multiple = TRUE
         )
       )
