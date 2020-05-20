@@ -1,7 +1,7 @@
 # server.R
 
-library(shiny)
-library(leaflet)
+#library(shiny)
+#library(leaflet)
 
 source("data_input.R")
 
@@ -13,6 +13,10 @@ server <- function(input, output, session) {
     #  })
     
     physco[which(physco$observed>=input$date[1] & physco$observed_on<=input$date[2]),]
+  })
+  
+  PhenoScores <- reactive({
+    physco[physco$pheno %in% input$pheno,]
   })
   
   output$PhyscoMap <- renderLeaflet({
@@ -64,5 +68,29 @@ server <- function(input, output, session) {
                        ),
                        color = ~ pal(pheno), #use the palette we want
       )
+
+  })
+  
+  observe({
+    
+    leafletProxy("PhyscoMap", data = PhenoScores()) %>%
+      clearMarkers() %>%
+      addCircleMarkers(lng = ~ longitude,
+                       lat = ~ latitude,
+                       popup = ~ paste(
+                         "<b>Observation ID:</b>",
+                         id,
+                         "<br>",
+                         "<b>Observation Date:</b>",
+                         observed_on,
+                         "<br>",
+                         "<b>Phenology Score:</b>",
+                         pheno,
+                         url,
+                         sep=" "
+                       ),
+                       color = ~ pal(pheno), #use the palette we want
+      )
+    
   })
 }

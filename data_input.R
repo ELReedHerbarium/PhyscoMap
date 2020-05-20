@@ -4,7 +4,7 @@ physco_obs = read.csv("observations-84630_OriginalExport_2020-04-08.csv")
 
 ### Dataframe Manipulation ###
 
-library(tidyverse)
+#library(tidyverse)
 
 physco <- physco_obs %>%
   select(id, # observation UID
@@ -22,7 +22,7 @@ physco$observed_on = as.Date(physco$observed_on) # Converts entries in the obser
 ### Haley's Additions ###
 
 
-### Phenology
+### Phenology Example Data
 
 ## Need to create a new column "phenology" to test out coloring the circle markers based on the phenology score
 ## Need to randomly assign a score of 0-4 to the observations (since this data does not exist yet)
